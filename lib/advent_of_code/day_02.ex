@@ -5,7 +5,7 @@ defmodule AdventOfCode.Day02 do
     |> String.split("\n")
     |> Enum.reduce(0,fn x, acc ->
       [o, m] = String.split(x, " ")
-      acc + judge(o,m)
+      acc + judge_p1(o,m)
     end)
   end
 
