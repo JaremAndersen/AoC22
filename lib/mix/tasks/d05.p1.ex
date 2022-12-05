@@ -5,12 +5,16 @@ defmodule Mix.Tasks.D05.P1 do
 
   @shortdoc "Day 05 Part 1"
   def run(args) do
-    input = nil
+    [_, input] =
+      AdventOfCode.Input.get!(5, 2022)
+      |> String.split("9 \n\n", trim: true)
+
+    moves = String.split(input, "\n", trim: true)
 
     if Enum.member?(args, "-b"),
-      do: Benchee.run(%{part_1: fn -> input |> part1() end}),
+      do: Benchee.run(%{part_1: fn -> moves |> part1() end}),
       else:
-        input
+        moves
         |> part1()
         |> IO.inspect(label: "Part 1 Results")
   end
