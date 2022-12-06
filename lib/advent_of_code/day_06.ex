@@ -1,17 +1,23 @@
 defmodule AdventOfCode.Day06 do
   def part1(input) do
-    input |> String.graphemes() |> find_start(0, 4)
+    input |> find_start(4)
   end
 
-  def find_start(enum, start, target_size) do
-    if Enum.slice(enum, start, target_size) |> MapSet.new() |> MapSet.size() < target_size do
-      find_start(enum, start + 1, target_size)
-    else
+  def find_start(enum, target_size, start \\ 0) do
+    uniq_count =
+      enum
+      |> Enum.slice(start, target_size)
+      |> Enum.uniq()
+      |> length
+
+    if uniq_count == target_size do
       start + target_size
+    else
+      find_start(enum, target_size, start + 1)
     end
   end
 
   def part2(input) do
-    input |> String.graphemes() |> find_start(0, 14)
+    input |> find_start(14)
   end
 end
